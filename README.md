@@ -8,7 +8,11 @@ There are 3 threads per worker type per instance of Matcha. This number (3) is c
 
 ## Installation
 
-Download from https://github.com/hm/borp
+Prerequisites: [brew](https://brew.sh/), [Java](https://clojure.org/guides/install_clojure#java)
+
+`brew install clojure/tools/clojure`
+
+`git clone git@github.com:acheng-hm/borp.git`
 
 ## Usage
 
