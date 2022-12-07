@@ -1,18 +1,29 @@
-{:paths ["src" "resources"]
+{:paths ["src"] ;; project paths
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         joda-time/joda-time {:mvn/version "2.12.1"}}
  :aliases
- {:run-m {:main-opts ["-m" "hm.borp"]}
-  :run-x {:ns-default hm.borp
-          :exec-fn greet
-          :exec-args {:name "Clojure"}}
-  :build {:deps {io.github.seancorfield/build-clj
-                 {:git/tag "v0.6.3" :git/sha "9b8e09b"
-                  ;; since we're building an app uberjar, we do not
-                  ;; need deps-deploy for clojars.org deployment:
-                  :deps/root "slim"}}
-          :ns-default build}
-  :test {:extra-paths ["test"]
-         :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
-                      io.github.cognitect-labs/test-runner
-                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}}}}}
+ {;; Run with clj -T:build function-in-build
+  :build {:deps {io.github.clojure/tools.build {:git/tag "v0.8.5" :git/sha "9c738da"}}
+          :ns-default build}}}
+
+
+;; {:paths ["src" "resources"]
+;;  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+;;         joda-time/joda-time {:mvn/version "2.12.1"}}
+;;  :aliases
+;;  {:run-m {:main-opts ["-m" "hm.borp"]}
+;;   :run-x {:ns-default hm.borp
+;;           :exec-fn main
+;;           :exec-args "extract.csv"}
+;;   :build {:deps {io.github.clojure/tools.build
+;;                  {:git/tag "v0.8.5" :git/sha "9c738da"}
+;;                  io.github.seancorfield/build-clj
+;;                  {:git/tag "v0.6.3" :git/sha "9b8e09b"
+;;                   ;; since we're building an app uberjar, we do not
+;;                   ;; need deps-deploy for clojars.org deployment:
+;;                   :deps/root "slim"}}
+;;           :ns-default build}
+;;   :test {:extra-paths ["test"]
+;;          :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+;;                       io.github.cognitect-labs/test-runner
+;;                       {:git/tag "v0.5.1" :git/sha "dfb30dd"}}}}}

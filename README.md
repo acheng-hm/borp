@@ -6,6 +6,12 @@ This utility helps you discover any dead box worker threads in Matcha by printin
 
 There are 3 threads per worker type per instance of Matcha. This number (3) is configured in Matcha's `common.edn` at `[:services :file-upload :number-of-workers]` and `[:services :docusign-document-download :number-of-workers]`
 
+
+Box workers are healthy if, in this tool's output, ...
+
+* you see 3 threads (guids) per topic per Matcha instance
+* AND you _eventually_ see a new log entry _in DataDog_ from the worst offender (the one with the longest time since the last log event)
+
 ## Installation
 
 Prerequisites: [brew](https://brew.sh/), [Java](https://clojure.org/guides/install_clojure#java)
@@ -22,7 +28,12 @@ Prerequisites: [brew](https://brew.sh/), [Java](https://clojure.org/guides/insta
 1. `cd` to the root directory of this git repo.
 1. `clojure -M -m hm.borp <full path to your extract.csv file from step 4>`
 
-Box workers are healthy if
+If you wanted to compile and build a jar for other people to use without installing brew or clojure, you could
 
-* you see 3 threads (guids) per topic per Matcha instance
-* AND you _eventually_ see a new log entry in DataDog from the worst offender (the one with the longest time since the last log event)
+`clj -T:build uber`
+
+... which creates a new jar in `target/`
+
+Then anyone who has Java can do this (below) after replacing the jar and extract.csv pathnames
+
+`java -jar <your jar> <the extract.csv from DD>`
